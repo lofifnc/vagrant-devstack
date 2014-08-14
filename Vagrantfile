@@ -42,9 +42,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo LOGDAYS=1 >> local.conf
     su vagrant -c "./stack.sh"
     
-
     su vagrant -c "export OS_AUTH_URL=http://127.0.0.1:5000/"
   SCRIPT
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
 
 end
